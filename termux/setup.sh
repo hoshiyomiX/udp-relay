@@ -4,6 +4,10 @@
 
 set -e
 
+# Set non-interactive mode for dpkg/apt
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+
 echo "========================================"
 echo "  UDP Relay - Termux Setup Script"
 echo "========================================"
@@ -66,6 +70,8 @@ echo ""
 # Update package lists
 echo "[2/5] Updating package lists..."
 if [ "$PKG_MANAGER" = "pkg" ]; then
+    # Fix any broken packages first
+    dpkg --configure -a 2>/dev/null || true
     pkg update -y || { echo "Failed to update packages"; exit 1; }
 else
     sudo $PKG_MANAGER update -y || { echo "Failed to update packages"; exit 1; }
@@ -75,9 +81,10 @@ fi
 echo ""
 echo "[3/5] Upgrading packages..."
 if [ "$PKG_MANAGER" = "pkg" ]; then
-    pkg upgrade -y || echo "Warning: Some packages could not be upgraded"
+    # Use -o to set dpkg options to handle config conflicts automatically
+    pkg upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" || echo "Warning: Some packages could not be upgraded"
 else
-    sudo $PKG_MANAGER upgrade -y || echo "Warning: Some packages could not be upgraded"
+    sudo $PKG_MANAGER upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" || echo "Warning: Some packages could not be upgraded"
 fi
 
 # Install Python
