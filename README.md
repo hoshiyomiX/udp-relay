@@ -33,6 +33,11 @@ Run the relay on your Android phone/tablet using Termux.
 curl -fsSL https://raw.githubusercontent.com/hoshiyomiX/udp-relay/main/install.sh | bash
 ```
 
+**One-line uninstall:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/hoshiyomiX/udp-relay/main/uninstall.sh | bash
+```
+
 **Manual installation:**
 ```bash
 # Install Termux from F-Droid (NOT Play Store)

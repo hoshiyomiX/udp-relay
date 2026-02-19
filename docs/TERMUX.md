@@ -387,6 +387,12 @@ For heavy use, consider a dedicated server instead.
 
 ## Uninstallation
 
+**One-line uninstall:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/hoshiyomiX/udp-relay/main/uninstall.sh | bash
+```
+
+**Manual uninstall:**
 ```bash
 # Stop the server
 ./termux/stop-relay.sh
