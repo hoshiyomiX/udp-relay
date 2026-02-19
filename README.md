@@ -22,6 +22,38 @@ docker run -p 7300:7300 --name udp-relay-server kelvinzer0/udp-relay
 docker run -p 8080:7300 --name udp-relay-server kelvinzer0/udp-relay
 ```
 
+### Running on Termux (Android)
+
+Run the relay on your Android phone/tablet using Termux.
+
+> ✅ **Works on NON-ROOTED phones** - No root access required!
+
+**One-line installation:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/hoshiyomiX/udp-relay/main/install.sh | bash
+```
+
+**Manual installation:**
+```bash
+# Install Termux from F-Droid (NOT Play Store)
+# https://f-droid.org/packages/com.termux/
+
+pkg install git -y
+git clone https://github.com/hoshiyomiX/udp-relay.git
+cd udp-relay
+chmod +x install-termux.sh && ./install-termux.sh
+```
+
+**Usage:**
+```bash
+./termux/start-relay.sh        # Start server (port 7300)
+./termux/start-relay.sh 8080   # Start on custom port (must be >= 1024)
+./termux/stop-relay.sh         # Stop server
+cat relay.log                  # View logs
+```
+
+See [docs/TERMUX.md](docs/TERMUX.md) for detailed setup, auto-start, and troubleshooting.
+
 ### Running from Source (Alternative)
 
 1.  **Prerequisites:**
